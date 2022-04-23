@@ -1,0 +1,23 @@
+{
+  "name": "api_ratingReviews",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "engines": {
+    "node": ">=6.13.0"
+  },
+  "scripts": {
+    "build-prod": "webpack --mode production",
+    "build-stats": "webpack --json > stats.json",
+    "react-dev": "webpack --mode development --watch",
+    "server-dev": "nodemon server/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.3.0",
+    "pg": "^8.7.3"
+  }
+}
