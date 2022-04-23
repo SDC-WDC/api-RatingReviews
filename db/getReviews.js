@@ -22,7 +22,7 @@ const getReviewsDb = async (page, count, sort, product_id) => {
       FROM reviews 
       where product_id=${product_id} 
       and reported=false
-      order by ${orderBy} 
+      order by ${orderBy} desc
       limit ${count} offset ${start}`)
     .then(reviews => reviews.rows)
     .catch(err => { console.log('Error in query reviews ', err) })
