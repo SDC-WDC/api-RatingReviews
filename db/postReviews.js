@@ -1,4 +1,4 @@
-var client = require('./index.js')
+var db = require('./index.js')
 
 const postReviews = async ({ product_id, rating, summary, body, recommend, name, email, photos, characteristics }) => {
   let x = [product_id, rating, summary, body, recommend, name, email].map(x => {
@@ -8,13 +8,12 @@ const postReviews = async ({ product_id, rating, summary, body, recommend, name,
   var queryString = `INSERT INTO 
   reviews(product_id,rating,summary,body,recommend,reviewer_name,reviewer_email) 
   VALUES(${x}) returning id`
-  await client.connect()
-  const review_id = await client.query(queryString)
+  const review_id = await db.query(queryString)
     .then(data => data.rows[0].id)
 
   let photoQueryString = `INSERT INTO photos(review_id,url) VALUES($1,$2) returning id`
   for (let url of photos) {
-    await client.query(photoQueryString, [review_id, url])
+    await db.query(photoQueryString, [review_id, url])
       .then(() => { })
   }
 
@@ -22,10 +21,9 @@ const postReviews = async ({ product_id, rating, summary, body, recommend, name,
   characteristics_review(characteristic_id,review_id,value) 
   VALUES($1,$2,$3) returning id`
   for (let key in characteristics) {
-    await client.query(charQueryString, [key, review_id, characteristics[key]])
+    await db.query(charQueryString, [key, review_id, characteristics[key]])
       .then(() => { })
   }
-  client.end()
 }
 
 module.exports = postReviews;

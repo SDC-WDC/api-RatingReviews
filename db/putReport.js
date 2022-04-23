@@ -1,15 +1,14 @@
-var client = require('./index.js')
+var db = require('./index.js')
 
-const putReport = (review_id) => {
+const putReport = async (review_id) => {
   var queryString = `
   UPDATE reviews
   SET reported=true
   where id=${review_id}
   `
-  client.connect();
-  client.query(queryString)
-    .then(() => { client.end() })
+  await db.query(queryString)
+    .then(() => { })
 }
 
-putReport(4950004)
-//module.exports = putReport;
+//putReport(4950004)
+module.exports = putReport;

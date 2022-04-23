@@ -1,14 +1,14 @@
-var client = require('./index.js')
+const db = require('./index.js')
 
 const getReviewsDb = async (page, count, sort, product_id) => {
-  await client.connect();
   const map = {
     helpful: 'helpfulness',
     newest: 'date',
     relevant: 'helpfulness'
   }
   const start = page * count - count
-  return await client.query(`
+  const orderBy = map[sort] || 'helpfulness'
+  const reviews = await db.query(`
       SELECT 
         id as review_id,
         rating,
@@ -18,25 +18,20 @@ const getReviewsDb = async (page, count, sort, product_id) => {
         body,
         date,
         reviewer_name,
-        helpfulness,
+        helpfulness
       FROM reviews 
       where product_id=${product_id} 
-      order by ${map[sort]} 
+      and reported=false
+      order by ${orderBy} 
       limit ${count} offset ${start}`)
-    .then(reviews => {
-      reviews = reviews.rows;
-      const id = reviews.map(x => x.review_id).join(',')
-      return client.query(`SELECT * FROM photos where review_id in (${id})`)
-        .then(photos => {
-          photos = photos.rows;
-          return photos
-        })
-        .then((photos) => {
-          //console.log(photos);
-          client.end()
-          return { reviews, photos }
-        })
-    })
+    .then(reviews => reviews.rows)
+    .catch(err => { console.log('Error in query reviews ', err) })
+  // console.log(reviews)
+  const id = reviews.map(x => x.review_id).join(',')
+  const photos = await db.query(`SELECT * FROM photos where review_id in (${id})`)
+    .then(photos => photos.rows)
+    .catch(err => { console.log('Error in query photos ', err) })
+  return { reviews, photos };
 }
 
 const getReviews = async (page, count, sort, product_id) => {
@@ -54,5 +49,5 @@ const getReviews = async (page, count, sort, product_id) => {
   return reviews;
 }
 
-getReviews(1, 5, 'newest', 15267);
-//module.exports = getReviews; 
+//getReviews(1, 100, 'newest', 544069);
+module.exports = getReviews; 

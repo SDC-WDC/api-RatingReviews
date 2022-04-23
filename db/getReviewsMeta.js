@@ -1,8 +1,7 @@
-var client = require('./index.js')
+const db = require('./index.js')
 
 const getReviewsMetaDb = async (product_id) => {
-  await client.connect();
-  return await client.query(`
+  return await db.query(`
     SELECT 
       reviews.rating,
       reviews.recommend,
@@ -13,26 +12,22 @@ const getReviewsMetaDb = async (product_id) => {
     join characteristics
     on reviews.product_id=characteristics.product_id
     join characteristics_review
-    on characteristics_review.characteristic_id=characteristics.id
+    on characteristics_review.review_id=reviews.id
     where reviews.product_id=${product_id} 
-    limit 10`)
-    .then(res => {
-      let reviews = res.rows;
-      client.end()
-      return reviews;
-    })
+    `)
+    .then(res => res.rows)
 }
 
 const getReviewsMeta = async (product_id) => {
   const reviews = await getReviewsMetaDb(product_id);
   let metaData = {}
   metaData.product_id = product_id;
-  metaData.rating = reviews.reduce((res, x) => {
+  metaData.ratings = reviews.reduce((res, x) => {
     res[x.rating] = res[x.rating] + 1 || 1
     return res
   }, {})
-  metaData.recommend = reviews.reduce((res, x) => {
-    let rec = x.recommend === true ? 1 : 0
+  metaData.recommended = reviews.reduce((res, x) => {
+    let rec = x.recommend
     res[rec] = res[rec] + 1 || 1
     return res
   }, {})
@@ -48,7 +43,6 @@ const getReviewsMeta = async (product_id) => {
     delete metaData.characteristics[key].cnt
   }
 
-  console.log(metaData);
   return metaData;
 }
 
