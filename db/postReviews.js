@@ -1,12 +1,18 @@
 var db = require('./index.js')
 
 const postReviews = async ({ product_id, rating, summary, body, recommend, name, email, photos, characteristics }) => {
-  let x = [product_id, rating, summary, body, recommend, name, email].map(x => {
+  let date = Date.now();
+  let helpfulness = 0;
+  let reported = false;
+  let x = [product_id, rating, date, summary, body, recommend, reported, name, email, helpfulness].map(x => {
     x = typeof x === 'string' ? "'" + x + "'" : x
     return x
   }).join(',')
+
+  console.log(x);
+
   var queryString = `INSERT INTO 
-  reviews(product_id,rating,summary,body,recommend,reviewer_name,reviewer_email) 
+  reviews(product_id,rating,date,summary,body,recommend,reported,reviewer_name,reviewer_email, helpfulness) 
   VALUES(${x}) returning id`
   const review_id = await db.query(queryString)
     .then(data => data.rows[0].id)
