@@ -1,10 +1,10 @@
 require('dotenv').config();
 const express = require('express');
-const getReviews = require('../db/getReviews.js');
-const getReviewsMeta = require('../db/getReviewsMeta.js');
-const postReviews = require('../db/postReviews.js');
-const putHelpful = require('../db/putHelpful.js');
-const putReport = require('../db/putReport.js');
+const getReviews = require('../db/controllers/getReviews.js');
+const getReviewsMeta = require('../db/controllers/getReviewsMeta.js');
+const postReviews = require('../db/controllers/postReviews.js');
+const putHelpful = require('../db/controllers/putHelpful.js');
+const putReport = require('../db/controllers/putReport.js');
 
 
 const app = express();

@@ -1,4 +1,4 @@
-var db = require('./index.js')
+var db = require('../index.js')
 
 const putHelpful = async (review_id) => {
   var queryString = `

@@ -1,4 +1,4 @@
-var db = require('./index.js')
+var db = require('../index.js')
 
 const putReport = async (review_id) => {
   var queryString = `
@@ -10,5 +10,5 @@ const putReport = async (review_id) => {
     .then(() => { })
 }
 
-//putReport(4950004)
 module.exports = putReport;
+//putReport(4950004)

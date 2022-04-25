@@ -89,16 +89,42 @@ console.log(x)
 
 
 // CREATE SEQUENCE reviews_id_seq OWNED BY reviews.id;
-// SELECT setval('reviews_id_seq', coalesce(max(id), 0) + 1, false) FROM reviews;
+// SELECT setval('reviews_id_seq', coalesce(max(id), 0) + 1, false) FROM reviews; 6️⃣
 // ALTER TABLE reviews ALTER COLUMN id SET DEFAULT nextval('reviews_id_seq');
 
 // CREATE SEQUENCE photos_id_seq OWNED BY photos.id;
-// SELECT setval('photos_id_seq', coalesce(max(id), 0) + 1, false) FROM photos;
+// SELECT setval('photos_id_seq', coalesce(max(id), 0) + 1, false) FROM photos;7️⃣
 // ALTER TABLE photos ALTER COLUMN id SET DEFAULT nextval('photos_id_seq');
 
 // CREATE SEQUENCE characteristics_review_id_seq OWNED BY characteristics_review.id;
-// SELECT setval('characteristics_review_id_seq', coalesce(max(id), 0) + 1, false) FROM characteristics_review;
+// SELECT setval('characteristics_review_id_seq', coalesce(max(id), 0) + 1, false) FROM characteristics_review;8️⃣
 // ALTER TABLE characteristics_review ALTER COLUMN id SET DEFAULT nextval('characteristics_review_id_seq');
+
+
+// \copy reviews from '/users/tangqi/desktop/hack/sdc/reviews.csv' delimiter ',' csv header; 
+// \copy characteristics from '/users/tangqi/desktop/hack/sdc/characteristics.csv' delimiter ',' csv header;
+// \copy characteristics_review from '/users/tangqi/desktop/hack/sdc/characteristic_reviews.csv' delimiter ',' csv header; 
+// \copy photos from '/users/tangqi/desktop/hack/sdc/reviews_photos.csv' delimiter ',' csv header;
+
+// Connect to DB
+// \c db_name
+
+// Show all tb
+// \dt
+
+// Show dbs
+// \l
+
+// describe table
+// \d tb_name
+
+// CREATE INDEX reviews_productid_idx ON reviews (product_id); 2️⃣
+// CREATE INDEX characteristics_productid_idx ON characteristics (product_id);3️⃣
+// CREATE INDEX characteristics_review_reviewid_idx ON characteristics_review (review_id);4️⃣
+// CREATE INDEX photos_reviewid_idx ON photos (review_id);5️⃣
+
+// psql -U [User_Name] -d [DB_Name] -f '[file_path].sql'
+//  psql -U tangqi -d api_reviews -f '/users/tangqi/desktop/hack/sdc/api-RatingReviews/db/tableSchema.sql' 1️⃣
 
 
 //data:
