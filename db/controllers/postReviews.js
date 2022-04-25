@@ -1,4 +1,4 @@
-var db = require('./index.js')
+var db = require('../index.js')
 
 const postReviews = async ({ product_id, rating, summary, body, recommend, name, email, photos, characteristics }) => {
   let date = Date.now();
@@ -9,7 +9,7 @@ const postReviews = async ({ product_id, rating, summary, body, recommend, name,
     return x
   }).join(',')
 
-  console.log(x);
+  // console.log(x);
 
   var queryString = `INSERT INTO 
   reviews(product_id,rating,date,summary,body,recommend,reported,reviewer_name,reviewer_email, helpfulness) 
@@ -39,4 +39,8 @@ module.exports = postReviews;
 //   characteristics: { 51075: 4 }
 // }
 // postReviews(a)
+
+// INSERT INTO 
+//   reviews(product_id,rating,summary,body,recommend,reported,reviewer_name,reviewer_email, helpfulness) 
+//   VALUES(66642,5,'kkkkkkk','kkk',false,false,'hihihi','k@k.gmail',0) 
 

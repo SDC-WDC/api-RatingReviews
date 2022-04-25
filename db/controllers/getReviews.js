@@ -1,4 +1,4 @@
-const db = require('./index.js')
+const db = require('../index.js')
 
 const getReviewsDb = async (page, count, sort, product_id) => {
   const map = {
@@ -26,7 +26,7 @@ const getReviewsDb = async (page, count, sort, product_id) => {
       limit ${count} offset ${start}`)
     .then(reviews => reviews.rows)
     .catch(err => { console.log('Error in query reviews ', err) })
-  // console.log(reviews)
+  //console.log(reviews)
   const id = reviews.map(x => x.review_id).join(',')
   const photos = await db.query(`SELECT * FROM photos where review_id in (${id})`)
     .then(photos => photos.rows)
@@ -50,4 +50,10 @@ const getReviews = async (page, count, sort, product_id) => {
 }
 
 //getReviews(1, 100, 'newest', 544069);
-module.exports = getReviews; 
+module.exports = getReviews;
+
+
+// UPDATE
+// reviews
+// SET
+// response = REPLACE(response, 'null', '')
