@@ -44,7 +44,7 @@ CREATE TABLE photos (
 
 \copy reviews from '/users/tangqi/desktop/hack/sdc/reviews.csv' delimiter ',' csv header; 
 \copy characteristics from '/users/tangqi/desktop/hack/sdc/characteristics.csv' delimiter ',' csv header;
-\copy characterstics_review from '/users/tangqi/desktop/hack/sdc/characteristic_reviews.csv' delimiter ',' csv header; 
+\copy characteristics_review from '/users/tangqi/desktop/hack/sdc/characteristic_reviews.csv' delimiter ',' csv header; 
 \copy photos from '/users/tangqi/desktop/hack/sdc/reviews_photos.csv' delimiter ',' csv header;
 
 

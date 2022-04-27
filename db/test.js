@@ -124,7 +124,7 @@ console.log(x)
 // CREATE INDEX photos_reviewid_idx ON photos (review_id);5️⃣
 
 // psql -U [User_Name] -d [DB_Name] -f '[file_path].sql'
-//  psql -U tangqi -d api_reviews -f '/users/tangqi/desktop/hack/sdc/api-RatingReviews/db/tableSchema.sql' 1️⃣
+// psql -U tangqi -d api_reviews -f '/users/tangqi/desktop/hack/sdc/api-RatingReviews/db/tableSchema.sql' 1️⃣
 
 
 //data:
@@ -143,3 +143,10 @@ console.log(x)
 // 8: {review_id: 384431, rating: 2, summary: 'Nobis eaque et.', recommend: true, response: 'null', …}
 // 9: {review_id: 384432, rating: 4, summary: 'Aspernatur distinctio modi cum blanditiis velit.', recommend: true, response: 'null', …}
 // length: 10
+
+
+//// remote!!
+//psql -U postgres -d api_reviews -h 3.88.113.113 -p 5432 -f '/users/tangqi/desktop/hack/sdc/api-RatingReviews/db/tableSchema.sql'
+
+//connect
+//psql -h 54.82.86.149 -p 5432 -U postgres

@@ -60,7 +60,7 @@ app.post('/reviews', handlePostReviews)
 app.put('/reviews/:review_id/helpful', handlePutHelpful)
 app.put('/reviews/:review_id/report', handlePutReport)
 
-app.listen(process.env.PORT, () => {
-  console.log(`listening on port ${process.env.PORT}`);
+app.listen(3504, () => {
+  console.log(`listening on port 3504`);
 });
 

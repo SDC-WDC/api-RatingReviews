@@ -57,3 +57,7 @@ module.exports = getReviews;
 // reviews
 // SET
 // response = REPLACE(response, 'null', '')
+
+//sudo docker run --name reviewsDatabase -p 5432:5432 -e POSTGRES_PASSWORD=5432 -d postgres
+
+// docker port : ubuntu port
